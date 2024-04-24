@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import {useCallback, useState} from 'react'
+import SpiritAnimalForm0 from './components/SpiritAnimalForm0.jsx'
 
 function SpiritAnimalApp() {
 
@@ -14,25 +15,18 @@ function SpiritAnimalApp() {
         feedback: ''
     });
 
-    const nextStep = () => {
+    const nextStep = useCallback(() => {
         setWorkflow({...workflow, step: workflow.step + 1 });
+    }, [workflow]);
+
+    const myFunction = () => {
+        alert("Hi");
     }
 
 
     return (
         <>
-            <div>
-                <h1>Spirit Animal App</h1>
-                <h2>{ workflow.step }</h2>
-            </div>
-            <div className="card">
-                <button onClick={nextStep}>
-                    Next
-                </button>
-                <p>
-                    Edit <code>src/SpiritAnimalApp.jsx</code> and save to test HMR
-                </p>
-            </div>
+            <SpiritAnimalForm0 workflow={workflow} handleClick={nextStep} />
         </>
     )
 }
