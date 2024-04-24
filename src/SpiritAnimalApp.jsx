@@ -1,5 +1,5 @@
 import {useCallback, useState} from 'react'
-import SpiritAnimalForm0 from './components/SpiritAnimalForm0.jsx'
+import WorkflowForm from './components/SpiritAnimalForm0.jsx'
 
 function SpiritAnimalApp() {
 
@@ -26,7 +26,7 @@ function SpiritAnimalApp() {
 
     return (
         <>
-            <SpiritAnimalForm0 workflow={workflow} handleClick={nextStep} />
+            <WorkflowForm workflow={workflow} handleClick={nextStep} />
         </>
     )
 }
