@@ -5,7 +5,7 @@ function SpiritAnimalApp() {
 
     const [workflow, setWorkflow] = useState({
         id: 237,
-        step: 0,
+        step: 1,
         name: null,
         animalName: null,
         whatIs: null,
@@ -20,6 +20,11 @@ function SpiritAnimalApp() {
         setWorkflow({...workflow, name: e.target.name.value, animalName: 'Firefox', step: workflow.step + 1 });
     }, [workflow]);
 
+    const whatIsThisAnimal = useCallback((e) => {
+        e.preventDefault();
+        setWorkflow({...workflow, whatIs: 'A Firefox is a Red Panda', step: workflow.step + 1 });
+    }, [workflow]);
+
     const getPoem = useCallback(() => {
         setWorkflow({...workflow, poem: 'Firefoxes are red, \nThey are not blue, \nThey are not green, \nThey are red.', step: workflow.step + 1 });
     }, [workflow]);
@@ -29,7 +34,8 @@ function SpiritAnimalApp() {
     }, [workflow]);
 
     const submitFeedback = useCallback((e) => {
-        setWorkflow({...workflow, feedback: e.feedback, step: workflow.step + 1 });
+        e.preventDefault();
+        setWorkflow({...workflow, feedback: e.target.feedback.value, step: workflow.step + 1 });
     }, [workflow]);
 
     const nextStep = useCallback(() => {
@@ -42,6 +48,7 @@ function SpiritAnimalApp() {
 
     const callbacks = {
         getSpiritAnimal,
+        whatIsThisAnimal,
         getPoem,
         addToPoem,
         submitFeedback,
