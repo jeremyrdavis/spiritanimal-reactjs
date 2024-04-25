@@ -55,15 +55,16 @@ const WorkflowDisplay = ({workflow}) => {
         </div>
     );
 }
+
 const WorkflowForm00 = ({ workflow, handleClick }) => {
     return (
         <>
             <h1>Get Your Spirit Animal!</h1>
             <p>{workflow.step}</p>
-            <form id={"nameform"}>
+            <form id="nameform" onSubmit={handleClick}>
             <label>Name:</label>
             <input type="text" name="name" />
-            <button type="button" onClick={handleClick}>Get My Spirit Animal!</button>
+            <button type="submit" >Get My Spirit Animal!</button>
             </form>
             <WorkflowDisplay workflow={workflow} />
         </>

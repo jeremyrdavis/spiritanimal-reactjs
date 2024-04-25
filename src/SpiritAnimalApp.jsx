@@ -16,7 +16,8 @@ function SpiritAnimalApp() {
     });
 
     const getSpiritAnimal = useCallback((e) => {
-        setWorkflow({...workflow, name: 'Foo', animalName: 'Firefox', step: workflow.step + 1 });
+        e.preventDefault();
+        setWorkflow({...workflow, name: e.target.name.value, animalName: 'Firefox', step: workflow.step + 1 });
     }, [workflow]);
 
     const getPoem = useCallback(() => {
