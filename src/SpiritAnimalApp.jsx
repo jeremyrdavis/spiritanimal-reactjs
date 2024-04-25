@@ -15,10 +15,6 @@ function SpiritAnimalApp() {
         feedback: null
     });
 
-    // const getAnimalName = (event) => {
-    //    event.preventDefault();
-    //    setWorkflow({...workflow, name: 'Foo', step: workflow.step + 1 });
-    // }
     const getSpiritAnimal = useCallback((e) => {
         setWorkflow({...workflow, name: 'Foo', animalName: 'Firefox', step: workflow.step + 1 });
     }, [workflow]);
@@ -43,14 +39,18 @@ function SpiritAnimalApp() {
         setWorkflow({...workflow, liked: true });
     }, [workflow]);
 
-    const myFunction = () => {
-        alert("Hi");
+    const callbacks = {
+        getSpiritAnimal,
+        getPoem,
+        addToPoem,
+        submitFeedback,
+        nextStep,
+        handleLike
     }
-
 
     return (
         <>
-            <WorkflowForm workflow={workflow} handleClick={getSpiritAnimal} handleLike={handleLike}/>
+            <WorkflowForm workflow={workflow} callbacks={callbacks} />
         </>
     )
 }

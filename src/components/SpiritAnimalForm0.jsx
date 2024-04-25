@@ -1,28 +1,28 @@
 import React from "react";
 
-const WorkflowForm = ({workflow, handleClick, handleLike}) => {
+const WorkflowForm = ({workflow, callbacks}) => {
     if(workflow.step === 0) {
         return(
             <>
-                <WorkflowForm00 workflow={workflow} handleClick={handleClick} handleLike={handleLike} />
+                <WorkflowForm00 workflow={workflow} handleClick={callbacks.getSpiritAnimal} handleLike={callbacks.handleLike} />
             </>
         );
     }else if(workflow.step === 1){
         return(
             <>
-                <WorkflowForm01 workflow={workflow} handleClick={handleClick} />
+                <WorkflowForm01 workflow={workflow} handleClick={callbacks.getPoem} handleLike={callbacks.handleLike} />
             </>
         );
     }else if(workflow.step === 2){
         return(
             <>
-                <WorkflowForm02 workflow={workflow} handleClick={handleClick} />
+                <WorkflowForm02 workflow={workflow} handleClick={callbacks.addToPoem} handleLike={callbacks.handleLike} />
             </>
         );
     }else if(workflow.step === 3){
         return(
             <>
-                <WorkflowForm03 workflow={workflow} handleClick={handleClick} />
+                <WorkflowForm03 workflow={workflow} handleClick={callbacks.submitFeedback} />
             </>
         );
     }else if(workflow.step === 4 ){
@@ -70,14 +70,14 @@ const WorkflowForm00 = ({ workflow, handleClick }) => {
     );
 }
 
-const WorkflowForm01 = ({workflow, handleClick}) => {
+const WorkflowForm01 = ({workflow, handleClick, handleLike}) => {
     return (
             <div>
                 <h1>What Is My Animal?</h1>
                 <p>{workflow.step}</p>
+                <button onClick={handleLike}>I'm Happy with My {workflow.animalName}</button>
+                <button onClick={handleClick}>Still Not Happy</button>
                 <WorkflowDisplay workflow={workflow} />
-                <button onClick={handleClick}>Accept</button>
-                <button onClick={handleClick}>Decline</button>
             </div>
     );
 }
@@ -89,6 +89,7 @@ const WorkflowForm02 = ({workflow, handleClick}) => {
             <p>{workflow.step}</p>
             <button onClick={handleClick}>Accept</button>
             <button onClick={handleClick}>Decline</button>
+            <WorkflowDisplay workflow={workflow} />
         </div>
     );
 }
@@ -100,6 +101,7 @@ const WorkflowForm03 = ({workflow, handleClick}) => {
             <p>{workflow.step}</p>
             <button onClick={handleClick}>Accept</button>
             <button onClick={handleClick}>Decline</button>
+            <WorkflowDisplay workflow={workflow} />
         </div>
     );
 }
@@ -113,6 +115,7 @@ const WorkflowForm04 = ({workflow, handleClick}) => {
                 <input type={"text"} name={"feedback"} />
                 <button onClick={handleClick}>Submit Feedback</button>
             </form>
+            <WorkflowDisplay workflow={workflow} />
         </div>
     );
 }
