@@ -25,10 +25,16 @@ const WorkflowForm = ({workflow, handleClick, handleLike}) => {
                 <WorkflowForm03 workflow={workflow} handleClick={handleClick} />
             </>
         );
-    }else if(workflow.step ===4 ){
+    }else if(workflow.step === 4 ){
         return(
             <>
                 <WorkflowForm03 workflow={workflow} handleClick={handleClick} />
+            </>
+        );
+    }else if(workflow.step === 5){
+        return(
+            <>
+                <WorkflowForm04 workflow={workflow} handleClick={handleClick} />
             </>
         );
     }
@@ -49,19 +55,18 @@ const WorkflowDisplay = ({workflow}) => {
         </div>
     );
 }
-const WorkflowForm00 = ({workflow, handleClick, handleLike}) => {
+const WorkflowForm00 = ({ workflow, handleClick }) => {
     return (
-            <div>
-                <h1>Get Your Spirit Animal!</h1>
-                <p>{workflow.step}</p>
-                <WorkflowDisplay workflow={workflow} />
-                <form id={"workflow-form"}>
-                <label>Name:</label>
-                <input type="text" name="name" />
-                <button onClick={handleLike}>Accept</button>
-                <button onClick={handleClick}>Decline</button>
-                </form>
-            </div>
+        <>
+            <h1>Get Your Spirit Animal!</h1>
+            <p>{workflow.step}</p>
+            <form id={"nameform"}>
+            <label>Name:</label>
+            <input type="text" name="name" />
+            <button type="button" onClick={handleClick}>Get My Spirit Animal!</button>
+            </form>
+            <WorkflowDisplay workflow={workflow} />
+        </>
     );
 }
 
@@ -104,8 +109,10 @@ const WorkflowForm04 = ({workflow, handleClick}) => {
         <div>
             <h1>What Did You Think of This App?</h1>
             <p>{workflow.step}</p>
-            <button onClick={handleClick}>Accept</button>
-            <button onClick={handleClick}>Decline</button>
+            <form id={ "feedback-form-" + workflow.id }>
+                <input type={"text"} name={"feedback"} />
+                <button onClick={handleClick}>Submit Feedback</button>
+            </form>
         </div>
     );
 }
