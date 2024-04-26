@@ -40,7 +40,7 @@ const WorkflowForm = ({workflow, callbacks}) => {
     }else if(workflow.step === 7){
         return(
             <>
-                <WorkflowForm07 workflow={workflow} handleClick={handleClick} />
+                <WorkflowThankYou workflow={workflow} handleClick={callbacks.handleBye} />
             </>
         );
     }
@@ -109,11 +109,11 @@ const WorkflowForm05 = ({workflow, handleClick, handleLike}) => {
     );
 }
 
-const WorkflowForm06 = ({workflow, submitFeedback}) => {
+const WorkflowForm06 = ({workflow, handleClick}) => {
     return (
         <div>
             <h1>What Did You Think of This App?</h1>
-            <form id={ "feedback-form-" + workflow.id } onSubmit={submitFeedback} >
+            <form id={ "feedback-form-" + workflow.id } onSubmit={handleClick} >
                 <input type="text" name="feedback" />
                 <button type="submit" >Submit Feedback</button>
             </form>
@@ -134,6 +134,16 @@ const WorkflowDisplay = ({workflow}) => {
             <p>Updated Poem: {workflow.updatedPoem}</p>
             <p>Liked: {workflow.liked}</p>
             <p>Feedback: {workflow.feedback}</p>
+        </div>
+    );
+}
+
+const WorkflowThankYou = ({workflow, handleClick}) => {
+    return (
+        <div>
+            <h1>Thank You!</h1>
+            <button onClick={handleClick}>Bye</button>
+            <WorkflowDisplay workflow={workflow} />
         </div>
     );
 }

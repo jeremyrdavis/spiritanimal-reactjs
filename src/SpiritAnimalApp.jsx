@@ -38,6 +38,11 @@ function SpiritAnimalApp() {
         setWorkflow({...workflow, feedback: e.target.feedback.value, step: workflow.step + 1 });
     }, [workflow]);
 
+    const handleBye = useCallback((e) => {
+        e.preventDefault();
+        setWorkflow({...workflow, step: 1 });
+    }, [workflow]);
+
     const nextStep = useCallback(() => {
         setWorkflow({...workflow, step: workflow.step + 1 });
     }, [workflow]);
@@ -52,6 +57,7 @@ function SpiritAnimalApp() {
         getPoem,
         addToPoem,
         submitFeedback,
+        handleBye,
         nextStep,
         handleLike
     }
