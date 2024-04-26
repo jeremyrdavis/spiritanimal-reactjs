@@ -48,7 +48,7 @@ function SpiritAnimalApp() {
     }, [workflow]);
 
     const handleLike = useCallback(() => {
-        setWorkflow({...workflow, liked: true });
+        setWorkflow({...workflow, liked: true, step: 6 });
     }, [workflow]);
 
     const callbacks = {

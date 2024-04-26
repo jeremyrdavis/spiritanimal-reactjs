@@ -90,7 +90,7 @@ const WorkflowForm04 = ({workflow, handleClick, handleLike}) => {
         <div>
             <h1>Does This Poem Change Your Mind?</h1>
             <p>{ workflow.poem }</p>
-            <button onClick={handleClick}>I Like My { workflow.animalName }</button>
+            <button onClick={handleLike}>I Like My { workflow.animalName }</button>
             <button onClick={handleClick}>I'm Still Not Convinced</button>
             <WorkflowDisplay workflow={workflow} />
         </div>
