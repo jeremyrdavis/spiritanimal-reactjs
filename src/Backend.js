@@ -50,6 +50,32 @@ async function backend04(workflowId) {
     return data;
 }
 
-export { backend01, backend02, backend03, backend04 }
+async function backend05(workflowId) {
+    const response = await fetch('http://localhost:8080//spiritanimals/like', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: workflowId
+    });
+    const data = await response.json();
+    console.log(data);
+    return data;
+}
+
+async function backend06(workflowId) {
+    const response = await fetch('http://localhost:8080//spiritanimals/feedback', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: workflowId
+    });
+    const data = await response.json();
+    console.log(data);
+    return data;
+}
+
+export { backend01, backend02, backend03, backend04, backend05, backend06 }
 
 

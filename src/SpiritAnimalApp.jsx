@@ -1,6 +1,6 @@
 import {useCallback, useState} from 'react'
 import WorkflowForm from './components/SpiritAnimalForm0.jsx'
-import { backend01, backend02, backend03, backend04 } from './Backend'
+import { backend01, backend02, backend03, backend04, backend05, backend06 } from './Backend'
 
 function SpiritAnimalApp() {
 
@@ -62,8 +62,11 @@ function SpiritAnimalApp() {
         setWorkflow({...workflow, step: workflow.step + 1 });
     }, [workflow]);
 
-    const handleLike = useCallback(() => {
-        setWorkflow({...workflow, liked: true, step: 6 });
+    const handleLike = useCallback(async () => {
+        let result = await backend05(workflow.id);
+        console.log(result);
+        let liked = result.liked;
+        setWorkflow({...workflow, liked: liked, step: 6 });
     }, [workflow]);
 
     const callbacks = {
