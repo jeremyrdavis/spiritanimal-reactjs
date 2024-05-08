@@ -1,4 +1,4 @@
-export default async function backend01(name) {
+export default async function assignSpiritAnimal(name) {
         const response = await fetch('http://localhost:8080//spiritanimals/assign', {
             method: 'POST',
             headers: {
@@ -11,7 +11,7 @@ export default async function backend01(name) {
         return data;
 };
 
-async function backend02(workflowId) {
+async function whatIsMySpiritAnimal(workflowId) {
     const response = await fetch('http://localhost:8080//spiritanimals/whatIs', {
         method: 'POST',
         headers: {
@@ -24,7 +24,7 @@ async function backend02(workflowId) {
     return data;
 }
 
-async function backend03(workflowId) {
+async function aPoemAboutMySpiritAnimal(workflowId) {
     const response = await fetch('http://localhost:8080//spiritanimals/poem', {
         method: 'POST',
         headers: {
@@ -37,7 +37,7 @@ async function backend03(workflowId) {
     return data;
 }
 
-async function backend04(workflowId) {
+async function anotherPoemAboutMySpiritAnimal(workflowId) {
     const response = await fetch('http://localhost:8080//spiritanimals/addToPoem', {
         method: 'POST',
         headers: {
@@ -50,8 +50,8 @@ async function backend04(workflowId) {
     return data;
 }
 
-async function backend05(workflowId) {
-    const response = await fetch('http://localhost:8080//spiritanimals/like', {
+async function likeMySpiritAnimal(workflowId) {
+    const response = await fetch('http://localhost:8080/spiritanimals/like', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -63,19 +63,20 @@ async function backend05(workflowId) {
     return data;
 }
 
-async function backend06(workflowId) {
-    const response = await fetch('http://localhost:8080//spiritanimals/feedback', {
+async function submitFeedbackAboutThisDemo(workflowId, feedback) {
+    let feedbackJson = JSON.stringify({id: workflowId, feedback: feedback});
+    const response = await fetch('http://localhost:8080/spiritanimals/feedback', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: workflowId
+        body: feedbackJson
     });
     const data = await response.json();
     console.log(data);
     return data;
 }
 
-export { backend01, backend02, backend03, backend04, backend05, backend06 }
+export { assignSpiritAnimal, whatIsMySpiritAnimal, aPoemAboutMySpiritAnimal, anotherPoemAboutMySpiritAnimal, likeMySpiritAnimal, submitFeedbackAboutThisDemo }
 
 

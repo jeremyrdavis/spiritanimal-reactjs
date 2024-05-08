@@ -1,6 +1,6 @@
 import {useCallback, useState} from 'react'
 import WorkflowForm from './components/SpiritAnimalForm0.jsx'
-import { backend01, backend02, backend03, backend04, backend05, backend06 } from './Backend'
+import { assignSpiritAnimal, whatIsMySpiritAnimal, aPoemAboutMySpiritAnimal, anotherPoemAboutMySpiritAnimal, likeMySpiritAnimal, submitFeedbackAboutThisDemo } from './Backend'
 
 function SpiritAnimalApp() {
 
@@ -18,7 +18,7 @@ function SpiritAnimalApp() {
 
     const getSpiritAnimal = useCallback( async(e) => {
         e.preventDefault();
-        let result = await backend01(e.target.name.value);
+        let result = await assignSpiritAnimal(e.target.name.value);
         console.log(result);
         let spiritAnimal = result.spiritAnimal;
         let workflowId = result.id;
@@ -28,29 +28,33 @@ function SpiritAnimalApp() {
 
     const whatIsThisAnimal = useCallback(async (e) => {
         e.preventDefault();
-        let result = await backend02(workflow.id);
+        let result = await whatIsMySpiritAnimal(workflow.id);
         console.log(result);
         let whatIs = result.whatIs;
         setWorkflow({...workflow, whatIs: whatIs, step: workflow.step + 1 });
     }, [workflow]);
 
     const getPoem = useCallback(async () => {
-        let result = await backend03(workflow.id)
+        let result = await aPoemAboutMySpiritAnimal(workflow.id)
         console.log(result);
         let poem = result.poem;
         setWorkflow({...workflow, poem: poem, step: workflow.step + 1 });
     }, [workflow]);
 
     const addToPoem = useCallback(async () => {
-        let result = await backend04(workflow.id)
+        let result = await anotherPoemAboutMySpiritAnimal(workflow.id)
         console.log(result);
         let updatedPoem = result.updatedPoem;
         setWorkflow({...workflow, updatedPoem: updatedPoem, step: workflow.step + 1 });
     }, [workflow]);
 
-    const submitFeedback = useCallback((e) => {
+    const submitFeedback = useCallback(async (e) => {
         e.preventDefault();
-        setWorkflow({...workflow, feedback: e.target.feedback.value, step: workflow.step + 1 });
+        console.log("feedback: ", e.target.feedback.value);
+        let result = await submitFeedbackAboutThisDemo(workflow.id, e.target.feedback.value);
+        console.log(result);
+        let feedback = result.feedback;
+        setWorkflow({...workflow, feedback: feedback, step: workflow.step + 1 });
     }, [workflow]);
 
     const handleBye = useCallback((e) => {
@@ -63,7 +67,7 @@ function SpiritAnimalApp() {
     }, [workflow]);
 
     const handleLike = useCallback(async () => {
-        let result = await backend05(workflow.id);
+        let result = await likeMySpiritAnimal(workflow.id);
         console.log(result);
         let liked = result.liked;
         setWorkflow({...workflow, liked: liked, step: 6 });
