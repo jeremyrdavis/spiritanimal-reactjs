@@ -10,4 +10,5 @@ export default async function backend01(name) {
         });
         const data = await response.json();
         console.log(data);
+        return data;
 };

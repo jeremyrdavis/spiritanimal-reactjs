@@ -16,10 +16,13 @@ function SpiritAnimalApp() {
         feedback: null
     });
 
-    const getSpiritAnimal = useCallback((e) => {
+    const getSpiritAnimal = useCallback( async(e) => {
         e.preventDefault();
-        backend01(e.target.name.value);
-        setWorkflow({...workflow, name: e.target.name.value, animalName: 'Firefox', step: workflow.step + 1 });
+        let result = await backend01(e.target.name.value);
+        console.log(result);
+        let spiritAnimal = result.spiritAnimal;
+        console.log(spiritAnimal);
+        setWorkflow({...workflow, name: e.target.name.value, animalName: spiritAnimal, step: workflow.step + 1 });
     }, [workflow]);
 
     const whatIsThisAnimal = useCallback((e) => {
