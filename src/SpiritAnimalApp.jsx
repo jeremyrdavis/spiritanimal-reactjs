@@ -1,11 +1,11 @@
 import {useCallback, useState} from 'react'
 import WorkflowForm from './components/SpiritAnimalForm0.jsx'
-import backend01 from './Backend.jsx'
+import { backend01, backend02 } from './Backend'
 
 function SpiritAnimalApp() {
 
     const [workflow, setWorkflow] = useState({
-        id: 237,
+        id: null,
         step: 1,
         name: null,
         animalName: null,
@@ -21,13 +21,17 @@ function SpiritAnimalApp() {
         let result = await backend01(e.target.name.value);
         console.log(result);
         let spiritAnimal = result.spiritAnimal;
+        let workflowId = result.id;
         console.log(spiritAnimal);
-        setWorkflow({...workflow, name: e.target.name.value, animalName: spiritAnimal, step: workflow.step + 1 });
+        setWorkflow({...workflow, id: workflowId, name: e.target.name.value, animalName: spiritAnimal, step: workflow.step + 1 });
     }, [workflow]);
 
-    const whatIsThisAnimal = useCallback((e) => {
+    const whatIsThisAnimal = useCallback(async (e) => {
         e.preventDefault();
-        setWorkflow({...workflow, whatIs: 'A Firefox is a Red Panda', step: workflow.step + 1 });
+        let result = await backend02(workflow.id);
+        console.log(result);
+        let whatIs = result.whatIs;
+        setWorkflow({...workflow, whatIs: whatIs, step: workflow.step + 1 });
     }, [workflow]);
 
     const getPoem = useCallback(() => {
