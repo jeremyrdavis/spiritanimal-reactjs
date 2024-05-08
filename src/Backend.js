@@ -24,6 +24,19 @@ async function backend02(workflowId) {
     return data;
 }
 
-export { backend01, backend02 }
+async function backend03(workflowId) {
+    const response = await fetch('http://localhost:8080//spiritanimals/poem', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: workflowId
+    });
+    const data = await response.json();
+    console.log(data);
+    return data;
+}
+
+export { backend01, backend02, backend03 }
 
 
